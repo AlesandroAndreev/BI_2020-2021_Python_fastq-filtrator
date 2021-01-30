@@ -4,11 +4,9 @@ import re
 path_to_input_fastq_file = input("Write path to input reads: ")
 path_to_output_fastq_file = input("Write path to output reads: ")
 
-keep_filtered_flag = input("Indicate filtered reads to be saved in a separate file (True or False): ")
-if keep_filtered_flag == "True":
-    keep_filtered_flag = True
-else:
-    keep_filtered_flag = False
+keep_filtered_flag = bool(input("Indicate filtered reads to be saved in a separate file (True or False): "))
+
+
 
 length_min = int(input("Indicate min read length: "))
 
@@ -45,7 +43,7 @@ to_write_failed = []
 
 input_fastq_file = open(path_to_input_fastq_file, 'r')
 output_fastq_file_passed_reads = open(path_to_output_fastq_file + '__passed.fastq', 'w')
-if keep_filtered_flag:
+if keep_filtered_flag is True:
     output_fastq_file_failed_reads = open(path_to_output_fastq_file + '__failed.fastq', 'w')
 
 
@@ -55,23 +53,23 @@ for line in input_fastq_file:
 
         if "length" in line:
 
-            if filter_by_length(length_min, line):
+            if filter_by_length(length_min, line) is True:
                 to_write_passed.append(line)
 
-            else:
+            elif filter_by_length(length_min, line) is False:
                 to_write_failed.append(line)
-
         else:
             to_write_failed.append(line)
 
     elif len(to_write_passed) == 1:
 
-        if filter_by_gc_content(gc_maximum, gc_minimum, line):
+        if filter_by_gc_content(gc_maximum, gc_minimum, line) is True:
             to_write_passed.append(line)
 
         else:
-            to_write_passed = []
+            to_write_failed.append(to_write_passed[0])
             to_write_failed.append(line)
+            to_write_passed = []
 
     elif len(to_write_passed) == 2:
         to_write_passed.append(line)
@@ -84,14 +82,12 @@ for line in input_fastq_file:
 
         to_write_passed = []
 
-
-    if keep_filtered_flag and to_write_failed:
+    if keep_filtered_flag is True:
         for failed_line in to_write_failed:
             output_fastq_file_failed_reads.write(failed_line)
         to_write_failed = []
 
-
-if keep_filtered_flag:
+if keep_filtered_flag is True:
     output_fastq_file_failed_reads.close()
 
 output_fastq_file_passed_reads.close()
