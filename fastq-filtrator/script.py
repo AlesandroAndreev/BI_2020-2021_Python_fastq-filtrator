@@ -6,8 +6,6 @@ path_to_output_fastq_file = input("Write path to output reads: ")
 
 keep_filtered_flag = bool(input("Indicate filtered reads to be saved in a separate file (True or False): "))
 
-
-
 length_min = int(input("Indicate min read length: "))
 
 gc_maximum = int(input("Indicate upper GC bound: "))
@@ -18,11 +16,13 @@ def get_read_length(read_header):
     read_length = re.search(r"length=[-+]?\d+", read_header)[0]
     return int(re.search(r"[-+]?\d+", read_length)[0])
 
+
 def filter_by_length(length_min, read_header):
     local_flag_to_write = False
     if get_read_length(read_header) >= length_min:
         local_flag_to_write = True
     return local_flag_to_write
+
 
 def count_gc_content(sequence):
     gc_nucleotides = 0
@@ -30,6 +30,7 @@ def count_gc_content(sequence):
         if nucleotide in ["G", "C"]:
             gc_nucleotides += 1
     return round((gc_nucleotides / len(sequence)) * 100)
+
 
 def filter_by_gc_content(gc_maximum, gc_minimum, sequence):
     local_flag_to_write = False
@@ -45,7 +46,6 @@ input_fastq_file = open(path_to_input_fastq_file, 'r')
 output_fastq_file_passed_reads = open(path_to_output_fastq_file + '__passed.fastq', 'w')
 if keep_filtered_flag is True:
     output_fastq_file_failed_reads = open(path_to_output_fastq_file + '__failed.fastq', 'w')
-
 
 for line in input_fastq_file:
 
