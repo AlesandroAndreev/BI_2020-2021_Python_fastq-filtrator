@@ -62,7 +62,10 @@ for index, arg in enumerate(argv):
             control_flag = False
             massage.format("gc_bounds")
         try:
-            gc_minimum = int(argv[index + 2])
+            gc_maximum= int(argv[index + 2])
+            if gc_minimum > gc_maximum:
+                control_flag = False
+                massage.format("gc_bounds")
         except ValueError:
             gc_maximum = gc_minimum
             gc_minimum = 0
@@ -76,7 +79,6 @@ if control_flag is True:
 
     input_fastq_file = open(argv[len(argv) - 1], 'r')
     output_fastq_file_passed_reads = open(output_base_name + '__passed.fastq', 'w')
-
 
     if keep_filtered_flag is True:
         output_fastq_file_failed_reads = open(output_base_name + '__failed.fastq', 'w')
