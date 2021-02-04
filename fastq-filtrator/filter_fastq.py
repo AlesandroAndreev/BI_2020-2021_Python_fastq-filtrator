@@ -30,7 +30,7 @@ def filter_by_gc_content(gc_maximum, gc_minimum, sequence):
 
 
 control_flag = True
-massage = "Wrong with {} argument. Please try again!"
+message: str = "Wrong with {} argument. Please try again!"
 output_base_name = ""
 file_pattern = re.compile(r'\w+\.fastq')
 length_min = 0
@@ -42,7 +42,7 @@ try:
     output_base_name = file_pattern.search(argv[len(argv) - 1]).group()[0:-6]
 except TypeError and AttributeError:
     control_flag = False
-    massage.format("input file")
+    message.format("input file")
 
 to_write_passed = []
 to_write_failed = []
@@ -53,18 +53,18 @@ for index, arg in enumerate(argv):
             length_min = int(argv[index + 1])
         except ValueError:
             control_flag = False
-            print(massage.format("min_length"))
+            print(message.format("min_length"))
     elif arg in ["--gc_bounds"] and len(argv) > index + 1:
         try:
             gc_minimum = int(argv[index + 1])
         except ValueError:
             control_flag = False
-            print(massage.format("gc_bounds"))
+            print(message.format("gc_bounds"))
         try:
             gc_maximum = int(argv[index + 2])
             if gc_minimum > gc_maximum:
                 control_flag = False
-                print(massage.format("gc_bounds"))
+                print(message.format("gc_bounds"))
         except ValueError:
             gc_maximum = gc_minimum
             gc_minimum = 0
