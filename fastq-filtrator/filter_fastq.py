@@ -52,18 +52,18 @@ for index, arg in enumerate(argv):
            length_min = int(argv[index + 1])
        except ValueError:
            control_flag = False
-           massage.format("min_length")
+           print(massage.format("min_length"))
     elif arg in ["--gc_bounds"] and len(argv) > index + 1:
         try:
             gc_minimum = int(argv[index + 1])
         except ValueError:
             control_flag = False
-            massage.format("gc_bounds")
+            print(massage.format("gc_bounds"))
         try:
             gc_maximum = int(argv[index + 2])
             if gc_minimum > gc_maximum:
                 control_flag = False
-                massage.format("gc_bounds")
+                print(massage.format("gc_bounds"))
         except ValueError:
             gc_maximum = gc_minimum
             gc_minimum = 0
@@ -126,9 +126,6 @@ if control_flag is True:
 
     output_fastq_file_passed_reads.close()
     input_fastq_file.close()
-else:
-    print(massage)
 
-print(length_min)
-print(gc_minimum)
-print(gc_maximum)
+
+
