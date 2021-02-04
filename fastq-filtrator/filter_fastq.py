@@ -50,8 +50,6 @@ for index, arg in enumerate(argv):
     if arg in ["--min_length"] and len(argv) > index + 1:
        try:
            length_min = int(argv[index + 1])
-           del argv[index]
-           del argv[index + 1]
        except ValueError:
            control_flag = False
            massage.format("min_length")
@@ -62,7 +60,7 @@ for index, arg in enumerate(argv):
             control_flag = False
             massage.format("gc_bounds")
         try:
-            gc_maximum= int(argv[index + 2])
+            gc_maximum = int(argv[index + 2])
             if gc_minimum > gc_maximum:
                 control_flag = False
                 massage.format("gc_bounds")
@@ -130,3 +128,7 @@ if control_flag is True:
     input_fastq_file.close()
 else:
     print(massage)
+
+print(length_min)
+print(gc_minimum)
+print(gc_maximum)
