@@ -1,6 +1,7 @@
 from sys import argv
 import re
 
+
 def get_read_length(read_header):
     read_length = re.search(r"length=[-+]?\d+", read_header)[0]
     return int(re.search(r"[-+]?\d+", read_length)[0])
@@ -48,11 +49,11 @@ to_write_failed = []
 
 for index, arg in enumerate(argv):
     if arg in ["--min_length"] and len(argv) > index + 1:
-       try:
-           length_min = int(argv[index + 1])
-       except ValueError:
-           control_flag = False
-           print(massage.format("min_length"))
+        try:
+            length_min = int(argv[index + 1])
+        except ValueError:
+            control_flag = False
+            print(massage.format("min_length"))
     elif arg in ["--gc_bounds"] and len(argv) > index + 1:
         try:
             gc_minimum = int(argv[index + 1])
@@ -71,7 +72,6 @@ for index, arg in enumerate(argv):
         keep_filtered_flag = True
     elif arg in ["--output_base_name"] and len(argv) > index + 1:
         output_base_name = argv[index + 1]
-
 
 if control_flag is True:
 
@@ -126,6 +126,3 @@ if control_flag is True:
 
     output_fastq_file_passed_reads.close()
     input_fastq_file.close()
-
-
-
