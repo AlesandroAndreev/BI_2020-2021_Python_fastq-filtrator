@@ -1,6 +1,7 @@
 from sys import argv
 import re
 
+#Functions
 
 def get_read_length(read_header):
     read_length = re.search(r"length=[-+]?\d+", read_header)[0]
@@ -28,6 +29,7 @@ def filter_by_gc_content(gc_maximum, gc_minimum, sequence):
         local_flag_to_write = True
     return local_flag_to_write
 
+#Body
 
 control_flag = True
 message: str = "Wrong with {} argument. Please try again!"
