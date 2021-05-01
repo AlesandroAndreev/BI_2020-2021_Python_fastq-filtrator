@@ -1,1 +1,1 @@
-fastq-filtrator!
+fastq-filtrater and test!

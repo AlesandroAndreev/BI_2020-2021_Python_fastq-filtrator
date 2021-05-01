@@ -1,3 +1,7 @@
+'''
+Фильтратор и тесты к нему писали Андреев Александр и Дерябин Павел
+'''
+
 from sys import argv
 import re
 
@@ -29,15 +33,7 @@ def filter_by_gc_content(input_gc_maximum, input_gc_minimum, sequence):
 
 # Body
 control_flag = True
-<<<<<<< HEAD
-<<<<<<< HEAD
 message = "Wrong {} argument. Please try again!"
-=======
-massage = "Wrong with {} argument. Please try again!"
->>>>>>> parent of 87d403b... finish version 5
-=======
-massage = "Wrong with {} argument. Please try again!"
->>>>>>> parent of 87d403b... finish version 5
 output_base_name = ""
 file_pattern = re.compile(r'\w+\.fastq')
 length_min = 0
@@ -49,7 +45,7 @@ try:
     output_base_name = file_pattern.search(argv[len(argv) - 1]).group()[0:-6]
 except TypeError and AttributeError:
     control_flag = False
-    massage.format("input file")
+    message.format("input file")
 
 to_write_passed = []
 to_write_failed = []
@@ -60,18 +56,18 @@ for index, arg in enumerate(argv):
             length_min = int(argv[index + 1])
         except ValueError:
             control_flag = False
-            print(massage.format("min_length"))
+            print(message.format("min_length"))
     elif arg in ["--gc_bounds"] and len(argv) > index + 1:
         try:
             gc_minimum = int(argv[index + 1])
         except ValueError:
             control_flag = False
-            print(massage.format("gc_bounds"))
+            print(message.format("gc_bounds"))
         try:
             gc_maximum = int(argv[index + 2])
             if gc_minimum > gc_maximum:
                 control_flag = False
-                print(massage.format("gc_bounds"))
+                print(message.format("gc_bounds"))
         except ValueError:
             gc_maximum = gc_minimum
             gc_minimum = 0
