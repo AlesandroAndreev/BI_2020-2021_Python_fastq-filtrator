@@ -1,7 +1,3 @@
-'''
-Фильтратор и тесты к нему писали Андреев Александр и Дерябин Павел
-'''
-
 from sys import argv
 import re
 
@@ -34,7 +30,11 @@ def filter_by_gc_content(input_gc_maximum, input_gc_minimum, sequence):
 # Body
 control_flag = True
 <<<<<<< HEAD
+<<<<<<< HEAD
 message = "Wrong {} argument. Please try again!"
+=======
+massage = "Wrong with {} argument. Please try again!"
+>>>>>>> parent of 87d403b... finish version 5
 =======
 massage = "Wrong with {} argument. Please try again!"
 >>>>>>> parent of 87d403b... finish version 5
